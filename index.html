@@ -54,6 +54,18 @@
         }
       })
     })
+
+    document.querySelectorAll('.container-generate-view').forEach((element) => {
+      element.addEventListener('click', function(event) {
+        function SayCopy() {
+          alert("Copied the password to clipboard: " + event.target.value);
+        }
+
+        event.target.select();
+        document.execCommand("copy");
+        setTimeout(SayCopy, 1000);
+      })
+    })
   </script>
 </body>
 </html>
