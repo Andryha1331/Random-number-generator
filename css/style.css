@@ -58,7 +58,7 @@ html, body {
   color: #D5D4D8;
 
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .generate-start {
@@ -88,7 +88,7 @@ html, body {
   background-color: #2F3E53;
   height: 1px;
 
-  margin: 25px 0;
+  margin: 35px 0;
 }
 
 .container-generate-view {
