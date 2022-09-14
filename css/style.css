@@ -31,9 +31,10 @@ html, body {
 }
 
 .generate-label {
-  width: 320px;
+  width: 360px;
   height: 80px;
 
+  font-family: 'Karla';
   font-style: normal;
   font-weight: 800;
   font-size: 40px;
@@ -50,6 +51,7 @@ html, body {
 }
 
 .generate-label-warning {
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -113,6 +115,7 @@ html, body {
 }
 
 .character-count-label {
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -129,6 +132,7 @@ html, body {
   background: #273549;
   border-radius: 6px;
 
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
