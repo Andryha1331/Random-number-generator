@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate password</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="generate">
+      <p class="generate-label">
+        Generate a <span class="colortext">random password</span>
+      </p>
+
+      <p class="generate-label-warning">
+        Never use an insecure password again.
+      </p>
+
+      <label for="character-count" class="character-count-label">Number of password characters:</label>
+      <input type="text" id="character-count" class="character-count-input" placeholder="max:8" >
+
+      <button class="generate-start">Generate passwords</button>
+
+      <hr class="line-style">
+
+      <div class="container-generate-view">
+        <input class="generate-view" type="text" name="generate-password1" id="password1">
+        <input class="generate-view" type="text" name="generate-password2" id="password2">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const characters=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9","~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",","|",":",";","<",">",".","?","/"];
+    
+    document.querySelector(".generate-start").addEventListener('click', function(event) {
+      document.querySelectorAll(".generate-view").forEach((element) => {
+        element.value = '';
+
+        const countCharacter = document.querySelector('.character-count-input').value;
+
+        if (Number.isInteger(+countCharacter) && +countCharacter > 0 && +countCharacter <=8 ){
+          for (let i=0; i<+countCharacter; i++) {
+            function arrayRandElement(arr) {
+              let rand = Math.floor(Math.random() * arr.length);
+              return arr[rand];
+            }
+            element.value += arrayRandElement(characters);
+          }
+        } 
+        else {
+          alert('Enter the correct password size!');
+        }
+      })
+    })
+  </script>
+</body>
+</html>
