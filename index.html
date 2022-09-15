@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Karla:wght@800&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="wrapper">
     <div class="generate">
@@ -19,7 +21,7 @@
       </p>
 
       <label for="character-count" class="character-count-label">Number of password characters:</label>
-      <input type="text" id="character-count" class="character-count-input" placeholder="max:8" >
+      <input type="text" id="character-count" class="character-count-input" placeholder="max:8">
 
       <button class="generate-start">Generate passwords</button>
 
@@ -33,46 +35,50 @@
   </div>
 
   <script>
-    const characters=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9","~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",","|",":",";","<",">",".","?","/"];
-    
-    document.querySelector(".generate-start").addEventListener('click', function(event) {
+    const CHARACTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "=", "{", "[", "}", "]", ",", "|", ":", ";", "<", ">", ".", "?", "/"];
+    const MIN_LENGTH_PASSWORD = 0;
+    const MAX_LENGTH_PASSWORD = 8;
+
+    function getRandomArrayElement(arr) {
+      const rand = Math.floor(Math.random() * arr.length);
+      return arr[rand];
+    }
+
+    document.querySelector(".generate-start").addEventListener('click', function (event) {
+      const countCharacter = document.querySelector('.character-count-input');
+      const countCharacterValue = Number(countCharacter.value);
+
+      if (!countCharacterValue) {
+        return alert('Enter password length!');
+      }
+
+      if (!Number.isInteger(countCharacterValue)) {
+        return alert('Enter obly number as password length');
+      }
+
+      if (!(countCharacterValue > MIN_LENGTH_PASSWORD && countCharacterValue <= MAX_LENGTH_PASSWORD)) {
+        return alert('Enter password length in range between 1 and 8!');
+      }
+
       document.querySelectorAll(".generate-view").forEach((element) => {
         element.value = '';
-
-        const countCharacter = document.querySelector('.character-count-input').value;
-
-        if (Number.isInteger(+countCharacter) && +countCharacter > 0 && +countCharacter <=8 ){
-          for (let i=0; i<+countCharacter; i++) {
-            function arrayRandElement(arr) {
-              let rand = Math.floor(Math.random() * arr.length);
-              return arr[rand];
-            }
-            element.value += arrayRandElement(characters);
-          }
-        } 
-        else {
-          alert('Enter the correct password size!');
+        for (let i = 0; i < countCharacterValue; i++) {
+          element.value += getRandomArrayElement(CHARACTERS);
         }
       })
     })
 
     document.querySelectorAll('.container-generate-view').forEach((element) => {
-      element.addEventListener('click', function(event) {
-        function SayCopy() {
-          alert("Copied the password to clipboard: " + event.target.value);
-        }
-
+      element.addEventListener('click', function (event) {
         if (event.target.value) {
-          event.target.select();
-          document.execCommand("copy");
-          setTimeout(SayCopy, 1000);
-        }
-        else 
-        {
-          alert("Generate passwords");
+          navigator.clipboard.writeText(event.target.value);
+          alert('Copy is success!');
+        } else {
+          alert('Please, generate password');
         }
       })
     })
   </script>
 </body>
+
 </html>
